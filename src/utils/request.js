@@ -9,7 +9,7 @@
  * Copyright (C) 2026 chen. All rights reserved.
  */
 import axios from "axios";
-import { Toast } from "mint-ui";
+import { Toast } from 'vant';
 // 创建axios实例
 const request = axios.create({
   baseURL: "/api", // 基础URL

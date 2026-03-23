@@ -21,112 +21,28 @@ Mock.mock(/\/api\/activity\/info/, "get", (options) => {
     error_msg: "",
     result: {
       // 活动状态，0-未开始 1-进行中 2-已结束
-      activity_status: 1,
-      // 按钮信息，最多3条
-      buttons: [
+      activity_status: Mock.Random.pick([0, 1, 2]),
+      // 组件信息
+      components: [
         {
-          // 按钮id
-          id: 0,
-          // 关联的任务状态，0：未完成，1：已完成
-          task_status: Mock.Random.pick([0, 1]),
-          // 当前游戏的状态，0：未触发，1：已触发
-          status: Mock.Random.pick([0, 1]),
-          // 任务完成且游戏触发后，需要替换的按钮文案
-          name: Mock.Random.pick([
-            "锐评的弹幕",
-            "友善的弹幕",
-            "搞笑的弹幕",
-            "犀利的弹幕",
-          ]),
-          // 按钮前的icon
-          icon: Mock.Random.pick([
-            "/static/images/icon1.png",
-            "/static/images/icon2.png",
-          ]),
-        },
-        {
+          // 组件id
           id: 1,
-          task_status: Mock.Random.pick([0, 1]),
+          // 组件类型，0-头 1-身体 2-武器
+          type: 0,
+          // 组件状态，0-未解锁 1-已解锁
           status: Mock.Random.pick([0, 1]),
-          name: Mock.Random.pick([
-            "锐评的弹幕",
-            "友善的弹幕",
-            "搞笑的弹幕",
-            "犀利的弹幕",
-          ]),
-          icon: Mock.Random.pick([
-            "/static/images/icon1.png",
-            "/static/images/icon2.png",
-          ]),
         },
         {
           id: 2,
-          task_status: Mock.Random.pick([0, 1]),
+          type: 1,
           status: Mock.Random.pick([0, 1]),
-          name: Mock.Random.pick([
-            "锐评的弹幕",
-            "友善的弹幕",
-            "搞笑的弹幕",
-            "犀利的弹幕",
-          ]),
-          icon: Mock.Random.pick([
-            "/static/images/icon1.png",
-            "/static/images/icon2.png",
-          ]),
+        },
+        {
+          id: 3,
+          type: 2,
+          status: Mock.Random.pick([0, 1]),
         },
       ],
-      // 最新一次的游戏记录
-      latest_play_info: {
-        // 关联的按钮信息
-        button: {
-          // 按钮id
-          id: Mock.Random.integer(0, 2),
-          // 关联的任务状态，0：未完成，1：已完成
-          task_status: Mock.Random.pick([0, 1]),
-          // 当前游戏的状态，0：未触发，1：已触发
-          status: Mock.Random.pick([0, 1]),
-          // 任务完成且游戏触发后，需要替换的按钮文案
-          name: Mock.Random.pick(["友善的弹幕", "锐评的弹幕", "搞笑的弹幕"]),
-          // 按钮前的icon
-          icon: Mock.Random.pick([
-            "/static/images/icon1.png",
-            "/static/images/icon2.png",
-          ]),
-        },
-        // 弹幕信息（5条）
-        danmakus: Mock.Random.range(5).map((index) => ({
-          // 弹幕
-          txt: Mock.Random.pick([
-            "今天你吃了吗？",
-            "今天太忙，没吃",
-            "这个活动真有意思！",
-            "我也要参加！",
-            "太好玩了",
-            "666",
-            "支持支持",
-            "期待更多活动",
-          ]),
-          // 是否高亮，第4条(索引3)固定为true，其他为false
-          highlight: index === 3,
-        })),
-        // 受击者信息
-        attacked: {
-          // 随机的图片
-          image_url: Mock.Random.image(
-            "200x200",
-            Mock.Random.color(),
-            "#FFF",
-            "attacked"
-          ),
-          txt: Mock.Random.pick([
-            "我是随机的文案",
-            "被攻击了",
-            "好痛啊",
-            "再来一次",
-            "太有趣了",
-          ]),
-        },
-      },
     },
   };
 });
@@ -151,58 +67,6 @@ Mock.mock(/\/api\/activity\/attack/, "post", (options) => {
     err_code: 0,
     error_msg: "",
     result: {
-      // 关联的按钮信息
-      button: {
-        // 按钮id
-        id: button_id,
-        // 关联的任务状态，0：未完成，1：已完成
-        task_status: Mock.Random.pick([0, 1]),
-        // 当前游戏的状态，0：未触发，1：已触发
-        status: 1, // 触发后状态为1
-        // 任务完成且游戏触发后，需要替换的按钮文案
-        name: Mock.Random.pick(["友善的弹幕", "锐评的弹幕", "搞笑的弹幕"]),
-        // 按钮前的icon
-        icon: Mock.Random.pick([
-          "/static/images/icon1.png",
-          "/static/images/icon2.png",
-        ]),
-      },
-      // 弹幕信息（5条）
-      danmakus: Mock.Random.range(5).map((index) => ({
-        // 弹幕
-        txt: Mock.Random.pick([
-          "今天你吃了吗？",
-          "今天太忙，没吃",
-          "这个活动真有意思！",
-          "我也要参加！",
-          "太好玩了",
-          "666",
-          "支持支持",
-          "期待更多活动",
-          "攻击成功！",
-          "太棒了！",
-        ]),
-        // 是否高亮，第4条(索引3)固定为true，其他为false
-        highlight: index === 3,
-      })),
-      // 受击者信息
-      attacked: {
-        // 随机的图片
-        image_url: Mock.Random.image(
-          "200x200",
-          Mock.Random.color(),
-          "#FFF",
-          "attacked"
-        ),
-        txt: Mock.Random.pick([
-          "我是随机的文案",
-          "被攻击了！",
-          "好痛啊！",
-          "再来一次！",
-          "太有趣了",
-          "攻击成功！",
-        ]),
-      },
     },
   };
 });

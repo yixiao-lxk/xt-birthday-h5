@@ -12,14 +12,15 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import MintUI from "mint-ui";
-import "mint-ui/lib/style.css";
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
 // 开发环境下引入mock
 // if (process.env.NODE_ENV === "development") {
   require("./mock");
 // }
 Vue.config.productionTip = false;
-Vue.use(MintUI);
 // 初始化biliSDK环境
 if (window.biliBridge) {
   const { initEnv } = window.biliBridge;
