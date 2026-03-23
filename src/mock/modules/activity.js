@@ -27,8 +27,8 @@ Mock.mock(/\/api\/activity\/info/, "get", (options) => {
         {
           // 组件id
           id: 1,
-          // 组件类型，0-头 1-身体 2-武器
-          type: 0,
+          // 次数 随机整数1-3
+          count: Mock.Random.integer(0, 3),
           //图片id 随机1-4
           image_id: Mock.Random.pick([1, 2, 3, 4]),
           // 组件状态，0-未解锁 1-已解锁
@@ -36,19 +36,23 @@ Mock.mock(/\/api\/activity\/info/, "get", (options) => {
         },
         {
           id: 2,
-          type: 1,
+          // 次数 随机整数0-3
+          count: Mock.Random.integer(0, 3),
           //图片id 随机1-4
           image_id: Mock.Random.pick([1, 2, 3, 4]),
           status: 1,
         },
         {
           id: 3,
-          type: 2,
+          // 次数 随机整数0-3
+          count: Mock.Random.integer(0, 3),
           //图片id 随机1-4
           image_id: Mock.Random.pick([1, 2, 3, 4]),
           status: 1,
         },
       ],
+      //用户昵称
+      user_nickname: Mock.Random.cname(),
     },
   };
 });
