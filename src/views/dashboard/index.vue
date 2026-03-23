@@ -14,139 +14,57 @@
         <div class="group_item_box">
           <div class="group_body_box head">
             <div v-if="activity_status == 0">
-              <img
-                class="part_img"
-                src="@/assets/images/components/unlocked_bg.png"
-                alt="解锁背景"
-              />
-              <img
-                class="unlockedImg"
-                src="@/assets/images/components/unlocked_img.png"
-                alt=""
-              />
+              <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
+              <img class="unlockedImg" src="@/assets/images/components/unlocked_img.png" alt="" />
             </div>
             <div v-else>
               <div v-if="components[0].status == 0">
-                <img
-                  class="part_img"
-                  src="@/assets/images/components/unlocked_bg.png"
-                  alt="解锁背景"
-                />
-                <img
-                  class="unlockedImg"
-                  src="@/assets/images/components/unlocked_video_1.png"
-                  alt=""
-                />
+                <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
+                <img class="unlockedImg" src="@/assets/images/components/unlocked_video_1.png" alt="" />
               </div>
-              <img
-                v-else
-                class="part_img"
-                src="@/assets/images/part/head.png"
-                alt="头"
-              />
+              <img v-else class="part_img" :src="require(`@/assets/images/part/head-${components[0].image_id}.png`)" alt="头" />
             </div>
-            <img
-              class="refresh_btn"
-              src="@/assets/images/components/refresh_btn.png"
-              alt=""
-              刷新
-            />
+            <img class="refresh_btn" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
             <span class="refresh_count_view">12</span>
           </div>
         </div>
         <div class="group_item_box">
           <div class="group_body_box body">
             <div v-if="activity_status == 0">
-              <img
-                class="part_img"
-                src="@/assets/images/components/unlocked_bg.png"
-                alt="解锁背景"
-              />
-              <img
-                class="unlockedImg"
-                src="@/assets/images/components/unlocked_img.png"
-                alt=""
-              />
+              <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
+              <img class="unlockedImg" src="@/assets/images/components/unlocked_img.png" alt="" />
             </div>
             <div v-else>
               <div v-if="components[1].status == 0">
-                <img
-                  class="part_img"
-                  src="@/assets/images/components/unlocked_bg.png"
-                  alt="解锁背景"
-                />
-                <img
-                  class="unlockedImg"
-                  src="@/assets/images/components/unlocked_video_2.png"
-                  alt=""
-                />
+                <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
+                <img class="unlockedImg" src="@/assets/images/components/unlocked_video_2.png" alt="" />
               </div>
-              <img
-                v-else
-                class="part_img"
-                src="@/assets/images/part/body.png"
-                alt="身体"
-              />
+              <img v-else class="part_img" :src="require(`@/assets/images/part/body-${components[1].image_id}.png`)" alt="身体" />
             </div>
-            <img
-              class="refresh_btn"
-              src="@/assets/images/components/refresh_btn.png"
-              alt=""
-              刷新
-            />
+            <img class="refresh_btn" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
             <span class="refresh_count_view">1</span>
           </div>
         </div>
         <div class="group_item_box">
           <div class="group_body_box weapon">
             <div v-if="activity_status == 0">
-              <img
-                class="part_img"
-                src="@/assets/images/components/unlocked_bg.png"
-                alt="解锁背景"
-              />
-              <img
-                class="unlockedImg"
-                src="@/assets/images/components/unlocked_img.png"
-                alt=""
-              />
+              <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
+              <img class="unlockedImg" src="@/assets/images/components/unlocked_img.png" alt="" />
             </div>
             <div v-else>
               <div v-if="components[2].status == 0">
-                <img
-                  class="part_img"
-                  src="@/assets/images/components/unlocked_bg.png"
-                  alt="解锁背景"
-                />
-                <img
-                  class="unlockedImg"
-                  src="@/assets/images/components/unlocked_video_3.png"
-                  alt=""
-                />
+                <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
+                <img class="unlockedImg" src="@/assets/images/components/unlocked_video_3.png" alt="" />
               </div>
-              <img
-                v-else
-                class="part_img"
-                src="@/assets/images/part/weapon.png"
-                alt="武器"
-              />
+              <img v-else class="part_img" :src="require(`@/assets/images/part/weapon-${components[2].image_id}.png`)" alt="武器" />
             </div>
-            <img
-              class="refresh_btn"
-              src="@/assets/images/components/refresh_btn.png"
-              alt=""
-              刷新
-            />
+            <img class="refresh_btn" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
             <span class="refresh_count_view">2</span>
           </div>
         </div>
       </div>
       <div class="bottom_btn_box">
-        <img
-          src="@/assets/images/combine_wait_img.png"
-          alt=""
-          @click="showShareDialog"
-        />
+        <img src="@/assets/images/combine_wait_img.png" alt="" @click="showShareDialog" />
       </div>
     </div>
     <share ref="shareRef" @close="handleCloseShare" />
@@ -172,6 +90,7 @@ export default {
     return {
       activity_status: 0,
       components: [],
+      combination: "",
     };
   },
   mounted() {
@@ -205,13 +124,15 @@ export default {
       console.log("活动信息", res);
       this.activity_status = res.activity_status;
       this.components = res.components;
+      this.combination = res.components.map((item) => item.image_id).join("-"),
+      console.log("组合数据", this.combination);
     },
     // 展示分享弹窗
     showShareDialog() {
-      this.$refs.shareRef.showShare();
+      this.$refs.shareRef.showShare(this.combination);
     },
     // 关闭分享弹窗
-    handleCloseShare() {},
+    handleCloseShare() { },
   },
 };
 </script>
@@ -224,6 +145,7 @@ export default {
   background-size: 100% auto;
   position: relative;
   overflow: hidden;
+
   .group_box {
     display: flex;
     align-items: center;
@@ -233,31 +155,33 @@ export default {
     row-gap: 0.21rem;
     width: 5.86rem;
     margin: 3.06rem auto 0;
+
     .group_item_box {
       width: 2.72rem;
       height: 3.64rem;
-      background: url(@/assets/images/components/item_box_bg.png) no-repeat top
-        center;
+      background: url(@/assets/images/components/item_box_bg.png) no-repeat top center;
       background-size: 100% auto;
+
       .group_body_box {
         position: relative;
         width: 2.72rem;
         height: 3.64rem;
+
         &.head {
-          background: url(@/assets/images/components/head_box_bg.png) no-repeat
-            top center;
+          background: url(@/assets/images/components/head_box_bg.png) no-repeat top center;
           background-size: 100% auto;
         }
+
         &.body {
-          background: url(@/assets/images/components/body_box_bg.png) no-repeat
-            top center;
+          background: url(@/assets/images/components/body_box_bg.png) no-repeat top center;
           background-size: 100% auto;
         }
+
         &.weapon {
-          background: url(@/assets/images/components/weapon_box_bg.png)
-            no-repeat top center;
+          background: url(@/assets/images/components/weapon_box_bg.png) no-repeat top center;
           background-size: 100% auto;
         }
+
         .unlockedImg {
           position: absolute;
           top: 0;
@@ -265,10 +189,12 @@ export default {
           width: 100%;
           height: 100%;
         }
+
         .part_img {
           width: 2.72rem;
           height: 3.64rem;
         }
+
         .refresh_btn {
           position: absolute;
           top: 0.62rem;
@@ -277,6 +203,7 @@ export default {
           height: 0.21rem;
           cursor: pointer;
         }
+
         .refresh_count_view {
           position: absolute;
           display: block;
@@ -290,12 +217,14 @@ export default {
       }
     }
   }
+
   .bottom_btn_box {
     text-align: center;
     height: 0.8rem;
     line-height: 0.8rem;
     margin-top: 0.3rem;
-    > img {
+
+    >img {
       cursor: pointer;
       width: 4rem;
       height: 0.8rem;

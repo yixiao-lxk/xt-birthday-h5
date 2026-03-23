@@ -21,7 +21,7 @@ Mock.mock(/\/api\/activity\/info/, "get", (options) => {
     error_msg: "",
     result: {
       // 活动状态，0-未开始 1-进行中 2-已结束
-      activity_status: Mock.Random.pick([0, 1, 2]),
+      activity_status: 1,
       // 组件信息
       components: [
         {
@@ -29,18 +29,24 @@ Mock.mock(/\/api\/activity\/info/, "get", (options) => {
           id: 1,
           // 组件类型，0-头 1-身体 2-武器
           type: 0,
+          //图片id 随机1-4
+          image_id: Mock.Random.pick([1, 2, 3, 4]),
           // 组件状态，0-未解锁 1-已解锁
-          status: Mock.Random.pick([0, 1]),
+          status: 1,
         },
         {
           id: 2,
           type: 1,
-          status: Mock.Random.pick([0, 1]),
+          //图片id 随机1-4
+          image_id: Mock.Random.pick([1, 2, 3, 4]),
+          status: 1,
         },
         {
           id: 3,
           type: 2,
-          status: Mock.Random.pick([0, 1]),
+          //图片id 随机1-4
+          image_id: Mock.Random.pick([1, 2, 3, 4]),
+          status: 1,
         },
       ],
     },
@@ -66,7 +72,8 @@ Mock.mock(/\/api\/activity\/attack/, "post", (options) => {
   return {
     err_code: 0,
     error_msg: "",
-    result: {},
+    result: {
+    },
   };
 });
 
