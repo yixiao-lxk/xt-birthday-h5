@@ -21,7 +21,7 @@ Mock.mock(/\/api\/activity\/info/, "get", (options) => {
     error_msg: "",
     result: {
       // 活动状态，0-未开始 1-进行中 2-已结束
-      activity_status: 1,
+      activity_status: Mock.Random.pick([0, 1, 2]),
       // 组件信息
       components: [
         {

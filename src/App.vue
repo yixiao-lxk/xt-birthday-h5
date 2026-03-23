@@ -15,6 +15,9 @@
 </template>
 
 <style>
+body {
+  background: #488bff;
+}
 body,
 div,
 p,
