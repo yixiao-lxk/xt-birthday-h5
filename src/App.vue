@@ -15,7 +15,13 @@
 </template>
 
 <style>
-body, div, p, span, i, em, img {
+body,
+div,
+p,
+span,
+i,
+em,
+img {
   padding: 0px;
   margin: 0px;
 }

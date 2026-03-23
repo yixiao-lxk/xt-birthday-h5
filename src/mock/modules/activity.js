@@ -66,8 +66,7 @@ Mock.mock(/\/api\/activity\/attack/, "post", (options) => {
   return {
     err_code: 0,
     error_msg: "",
-    result: {
-    },
+    result: {},
   };
 });
 
