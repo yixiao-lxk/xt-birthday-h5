@@ -77,10 +77,10 @@
         <img v-else src="@/assets/images/combine_wait_img.png" alt="" />
       </div>
     </div>
-    <div class="ruleView">
+    <!-- <div class="ruleView">
       <a href="javascript:void(0)" target="_blank">查看更多</a>
       <a href="javascript:void(0)" @click="showRule">活动详细规则</a>
-    </div>
+    </div> -->
     <share ref="shareRef" @close="handleCloseShare" />
     <rule ref="ruleRef"/>
   </main>
@@ -243,8 +243,6 @@ export default {
           right: 0;
           width: 1.56rem;
           height: 0.78rem;
-          background: #000;
-          opacity: 0.8;
         }
       }
     }
