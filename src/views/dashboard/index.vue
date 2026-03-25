@@ -73,7 +73,7 @@
         </div>
       </div>
       <div class="bottom_btn_box">
-        <img v-if="components.length > 0 && components[0].status == 1 && components[1].status == 1 && components[2].status == 1" src="@/assets/images/combine_img.png" alt="" @click="showShareDialog" />
+        <img v-if="activity_status != 0 && components.length > 0 && components[0].status == 1 && components[1].status == 1 && components[2].status == 1" src="@/assets/images/combine_img.png" alt="" @click="showShareDialog" />
         <img v-else src="@/assets/images/combine_wait_img.png" alt="" />
       </div>
     </div>
