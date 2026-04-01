@@ -140,7 +140,6 @@ export default {
         config: { activity_id },
       } = this;
       const res = await getActivityInfo({ activity_id });
-      console.log("活动信息", res);
       this.activity_status = res.activity_status;
       this.components = res.components;
       this.combination = res.components.map((item) => item.image_id).join("-"),
@@ -161,6 +160,8 @@ export default {
     refreshComponent(index) {
       // 图片的id
       this.components[index].image_id = Mock.Random.pick([1, 2, 3, 4]);
+      this.combination = this.components.map((item) => item.image_id).join("-");
+      console.log("组合数据", this.combination);
     },
   },
 };
