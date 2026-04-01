@@ -24,7 +24,7 @@
               </div>
               <img v-else class="part_img" :src="require(`@/assets/images/part/head-${components[0].image_id}.png`)" alt="头" />
             </div>
-            <img class="refresh_btn" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
+            <img class="refresh_btn" @click.stop="refreshComponent(0)" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
             <span class="refresh_count_view">{{ components[0].count }}</span>
             <div class="buttonView">
 
@@ -44,7 +44,7 @@
               </div>
               <img v-else class="part_img" :src="require(`@/assets/images/part/body-${components[1].image_id}.png`)" alt="身体" />
             </div>
-            <img class="refresh_btn" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
+            <img class="refresh_btn" @click.stop="refreshComponent(1)" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
             <span class="refresh_count_view">{{ components[1].count }}</span>
             <div class="buttonView">
 
@@ -64,7 +64,7 @@
               </div>
               <img v-else class="part_img" :src="require(`@/assets/images/part/weapon-${components[2].image_id}.png`)" alt="武器" />
             </div>
-            <img class="refresh_btn" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
+            <img class="refresh_btn" @click.stop="refreshComponent(2)" src="@/assets/images/components/refresh_btn.png" alt="" 刷新 />
             <span class="refresh_count_view">{{ components[2].count }}</span>
             <div class="buttonView">
 
@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import Mock from "mockjs";
 import share from "./components/share.vue";
 import rule from "./components/rule.vue";
 import { getActivityInfo } from "@/utils/api";
@@ -156,6 +157,11 @@ export default {
     },
     // 关闭分享弹窗
     handleCloseShare() { },
+    // 刷新部件
+    refreshComponent(index) {
+      // 图片的id
+      this.components[index].image_id = Mock.Random.pick([1, 2, 3, 4]);
+    },
   },
 };
 </script>

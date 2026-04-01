@@ -30,7 +30,7 @@ Mock.mock(/\/api\/activity\/info/, "get", (options) => {
           // 次数 随机整数1-3
           count: Mock.Random.integer(0, 3),
           //图片id 随机1-4
-          image_id: Mock.Random.pick([1, 2, 3, 4]),
+          image_id: 4,
           // 组件状态，0-未解锁 1-已解锁
           status: 1,
         },
