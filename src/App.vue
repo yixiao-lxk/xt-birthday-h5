@@ -13,19 +13,3 @@
 <template>
   <RouterView />
 </template>
-
-<style>
-body {
-  background: #488bff;
-}
-body,
-div,
-p,
-span,
-i,
-em,
-img {
-  padding: 0px;
-  margin: 0px;
-}
-</style>
