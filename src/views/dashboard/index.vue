@@ -75,9 +75,9 @@
           </div>
         </div>
       </div>
-      <div class="bottom_btn_box">
+      <div class="bottom_btn_box" v-if="components.length">
         <img v-if="components.every((item) => item.group_status == 2)" src="@/assets/images/combine_img.png" alt="" @click="showShareDialog" />
-        <img v-else src="@/assets/images/combine_wait_img.png" alt="" />
+        <img v-else class="disabled" src="@/assets/images/combine_wait_img.png" alt="" />
       </div>
     </div>
     <share ref="shareRef" @close="handleCloseShare" />
@@ -274,6 +274,12 @@ export default {
       cursor: pointer;
       width: 4rem;
       height: 0.8rem;
+    }
+    >img.disabled {
+      filter: grayscale(1);
+      opacity: 0.8;
+      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 }

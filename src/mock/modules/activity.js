@@ -104,7 +104,7 @@ Mock.mock(/\/activity\/api\/open_api\/v1\/star_rail_mecha\/refresh/, "post", (op
     error_msg: "",
     result: {
       ...getGroupImage(group_id || 1),
-      "remain_refresh_count": Mock.Random.integer(0, 10),
+      "remain_refresh_count": Mock.Random.integer(0, 1),
     },
   };
 });
