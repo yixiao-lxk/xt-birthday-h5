@@ -12,7 +12,7 @@ import axios from "axios";
 import { Toast } from "vant";
 // 创建axios实例
 const request = axios.create({
-  baseURL: "/api", // 基础URL
+  baseURL: "/activity/api/open_api/v1", // 基础URL
   timeout: 10000, // 请求超时时间
   headers: {
     "Content-Type": "application/json;charset=utf-8",

@@ -1,8 +1,44 @@
 import Mock from "mockjs";
 
+const headImgs = {
+  1: require("@/assets/images/part/head-1.png"),
+  2: require("@/assets/images/part/head-2.png"),
+  3: require("@/assets/images/part/head-3.png"),
+  4: require("@/assets/images/part/head-4.png"),
+};
+const bodyImgs = {
+  1: require("@/assets/images/part/body-1.png"),
+  2: require("@/assets/images/part/body-2.png"),
+  3: require("@/assets/images/part/body-3.png"),
+  4: require("@/assets/images/part/body-4.png"),
+};
+const weaponImgs = {
+  1: require("@/assets/images/part/weapon-1.png"),
+  2: require("@/assets/images/part/weapon-2.png"),
+  3: require("@/assets/images/part/weapon-3.png"),
+  4: require("@/assets/images/part/weapon-4.png"),
+};
+
+const generateImgs = [
+  require("@/assets/images/generate/1-1-1.png"),
+  require("@/assets/images/generate/1-2-3.png"),
+  require("@/assets/images/generate/2-3-4.png"),
+  require("@/assets/images/generate/3-1-2.png"),
+  require("@/assets/images/generate/4-2-1.png"),
+  require("@/assets/images/generate/4-4-4.png"),
+];
+
+const getGroupImage = (groupId) => {
+  const imageId = Mock.Random.integer(1, 4);
+  if (groupId === 1) return { image_id: imageId, image_url: headImgs[imageId] };
+  if (groupId === 2) return { image_id: imageId, image_url: bodyImgs[imageId] };
+  return { image_id: imageId, image_url: weaponImgs[imageId] };
+};
+
 // 2.1 查询用户信息接口
-// 接口路径待补充，这里使用 /api/activity/info 作为示例路径
-Mock.mock(/\/api\/activity\/info/, "get", (options) => {
+
+// 接口路径待补充，这里使用 /activity/api/open_api/v1/star_rail_mecha/detail 作为示例路径
+Mock.mock(/\/activity\/api\/open_api\/v1\/star_rail_mecha\/detail/, "get", (options) => {
   const urlParams = new URLSearchParams(options.url.split("?")[1]);
   const activityId = parseInt(urlParams.get("activity_id"));
 
@@ -20,48 +56,38 @@ Mock.mock(/\/api\/activity\/info/, "get", (options) => {
     err_code: 0,
     error_msg: "",
     result: {
-      // 活动状态，0-未开始 1-进行中 2-已结束
-      activity_status: Mock.Random.pick([0, 1, 2]),
-      // 组件信息
-      components: [
+      "activity_id": 1001,
+      "activity_status": 1,
+      "poster_url": "",
+      "groups": [
         {
-          // 组件id
-          id: 1,
-          // 次数 随机整数1-3
-          count: Mock.Random.integer(0, 3),
-          //图片id 随机1-4
-          image_id: 4,
-          // 组件状态，0-未解锁 1-已解锁
-          status: 1,
+          "group_id": 1,
+          "group_status": Mock.Random.integer(1, 2),
+          ...getGroupImage(1),
+          "remain_refresh_count": Mock.Random.integer(0, 10),
         },
         {
-          id: 2,
-          // 次数 随机整数0-3
-          count: Mock.Random.integer(0, 3),
-          //图片id 随机1-4
-          image_id: Mock.Random.pick([1, 2, 3, 4]),
-          status: 1,
+          "group_id": 2,
+          "group_status": Mock.Random.integer(1, 2),
+          ...getGroupImage(2),
+          "remain_refresh_count": Mock.Random.integer(0, 10),
         },
         {
-          id: 3,
-          // 次数 随机整数0-3
-          count: Mock.Random.integer(0, 3),
-          //图片id 随机1-4
-          image_id: Mock.Random.pick([1, 2, 3, 4]),
-          status: 1,
-        },
-      ],
-      //用户昵称
-      user_nickname: Mock.Random.cname(),
+          "group_id": 3,
+          "group_status": 2,
+          ...getGroupImage(3),
+          "remain_refresh_count": Mock.Random.integer(0, 10),
+        }
+      ]
+
     },
   };
 });
 
-// 2.2 触发攻击接口
-// 接口路径待补充，这里使用 /api/activity/attack 作为示例路径
-Mock.mock(/\/api\/activity\/attack/, "post", (options) => {
+// 2.2 刷新部件接口
+Mock.mock(/\/activity\/api\/open_api\/v1\/star_rail_mecha\/refresh/, "post", (options) => {
   const body = JSON.parse(options.body);
-  const { activity_id, button_id } = body;
+  const { activity_id, group_id } = body;
 
   // 如果活动不是进行中，返回错误
   if (activity_id !== 11011) {
@@ -77,13 +103,48 @@ Mock.mock(/\/api\/activity\/attack/, "post", (options) => {
     err_code: 0,
     error_msg: "",
     result: {
+      ...getGroupImage(group_id || 1),
+      "remain_refresh_count": Mock.Random.integer(0, 10),
     },
   };
 });
 
-// 2.3 上传图片接口
-// 接口路径待补充，这里使用 /api/activity/upload 作为示例路径
-Mock.mock(/\/api\/activity\/upload/, "post", (options) => {
+// 2.3 合成机甲接口
+Mock.mock(/\/activity\/api\/open_api\/v1\/star_rail_mecha\/synthesize/, "post", (options) => {
+  const body = JSON.parse(options.body);
+  const { activity_id } = body;
+  // 如果活动不是进行中，返回错误
+  if (activity_id !== 11011) {
+    return {
+      err_code: 1,
+      error_msg: "活动不在进行中",
+      result: null,
+    };
+  }
+  return {
+    err_code: 0,
+    error_msg: "",
+    result: {
+      "poster_url": Mock.Random.pick(generateImgs),
+     },
+  };
+});
+
+// 2.4 获取昵称接口
+Mock.mock(/\/up_account\/info/, "get", (options) => {
+  return {
+    err_code: 0,
+    error_msg: "",
+    result: {
+      "mid": 0,
+      "name": Mock.Random.cname(),
+      "face": Mock.Random.image(),
+    },
+  };
+});
+
+// 2.5 上传图片接口
+Mock.mock(/\/activity\/api\/open_api\/v1\/star_rail_mecha\/upload/, "post", (options) => {
   // 处理form表单数据
   // 注意：Mock.js无法直接处理FormData，这里模拟处理
   // 实际使用时，axios会自动将FormData转换为字符串，这里需要解析
