@@ -64,19 +64,19 @@ Mock.mock(/\/activity\/api\/open_api\/v1\/star_rail_mecha\/detail/, "get", (opti
           "group_id": 1,
           "group_status": Mock.Random.integer(1, 2),
           ...getGroupImage(1),
-          "remain_refresh_count": Mock.Random.integer(0, 10),
+          "remain_refresh_count": Mock.Random.integer(0, 1),
         },
         {
           "group_id": 2,
           "group_status": Mock.Random.integer(1, 2),
           ...getGroupImage(2),
-          "remain_refresh_count": Mock.Random.integer(0, 10),
+          "remain_refresh_count": Mock.Random.integer(0, 1),
         },
         {
           "group_id": 3,
           "group_status": 2,
           ...getGroupImage(3),
-          "remain_refresh_count": Mock.Random.integer(0, 10),
+          "remain_refresh_count": Mock.Random.integer(0, 1),
         }
       ]
 

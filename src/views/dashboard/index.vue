@@ -17,16 +17,16 @@
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_img_1.png" alt="" />
             </div>
-            <div v-else-if="components[0].group_status == 1">
+            <div v-if="components[0] && components[0].group_status == 1">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_video_1.png" alt="" />
             </div>
-            <div v-else>
-              <img class="part_img" :src="require(`@/assets/images/part/head-${components[0].image_id}.png`)" alt="头" />
+            <div  v-if="components[0] && components[0].group_status == 2">
+              <img class="part_img" :src="components[0].image_url" alt="头" />
             </div>
             <img class="refresh_btn" @click.stop="refreshComponent(0)" src="@/assets/images/components/refresh_btn.png"
               alt="" 刷新 />
-            <span class="refresh_count_view">{{ components[0].count }}</span>
+            <span class="refresh_count_view">{{components[0] && components[0].remain_refresh_count }}</span>
             <div class="buttonView">
 
             </div>
@@ -38,17 +38,16 @@
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_img_2.png" alt="" />
             </div>
-            <div v-else-if="components[1].group_status == 1">
+            <div v-if="components[1] && components[1].group_status == 1">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_video_2.png" alt="" />
             </div>
-            <div v-else>
-              <img class="part_img" :src="require(`@/assets/images/part/body-${components[1].image_id}.png`)"
-                alt="身体" />
+            <div  v-if="components[1] && components[1].group_status == 2">
+              <img class="part_img" :src="components[1].image_url" alt="身体" />
             </div>
             <img class="refresh_btn" @click.stop="refreshComponent(1)" src="@/assets/images/components/refresh_btn.png"
               alt="" 刷新 />
-            <span class="refresh_count_view">{{ components[1].count }}</span>
+            <span class="refresh_count_view">{{components[1] && components[1].remain_refresh_count }}</span>
             <div class="buttonView">
 
             </div>
@@ -60,17 +59,16 @@
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_img_3.png" alt="" />
             </div>
-            <div v-else-if="components[2].group_status == 1">
+            <div v-if="components[2] && components[2].group_status == 1">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_video_3.png" alt="" />
             </div>
-            <div v-else>
-              <img class="part_img" :src="require(`@/assets/images/part/weapon-${components[2].image_id}.png`)"
-                alt="武器" />
+            <div  v-if="components[2] && components[2].group_status == 2">
+              <img class="part_img" :src="components[2].image_url" alt="武器" />
             </div>
             <img class="refresh_btn" @click.stop="refreshComponent(2)" src="@/assets/images/components/refresh_btn.png"
               alt="" 刷新 />
-            <span class="refresh_count_view">{{ components[2].count }}</span>
+            <span class="refresh_count_view">{{components[2] && components[2].remain_refresh_count }}</span>
             <div class="buttonView">
 
             </div>
@@ -78,9 +76,7 @@
         </div>
       </div>
       <div class="bottom_btn_box">
-        <img
-          v-if="activity_status != 0 && components.length > 0 && components[0].status == 1 && components[1].status == 1 && components[2].status == 1"
-          src="@/assets/images/combine_img.png" alt="" @click="showShareDialog" />
+        <img v-if="components.every((item) => item.group_status == 2)" src="@/assets/images/combine_img.png" alt="" @click="showShareDialog" />
         <img v-else src="@/assets/images/combine_wait_img.png" alt="" />
       </div>
     </div>
@@ -90,6 +86,7 @@
 
 <script>
 import share from "./components/share.vue";
+import { Toast } from "vant";
 import { getActivityInfo, refreshPart, mergeMecha } from "@/utils/api";
 
 export default {
@@ -105,11 +102,7 @@ export default {
   },
   data() {
     return {
-      components: [
-        { image_url: "", remain_refresh_count: 0, group_id: 1 },
-        { image_url: "", remain_refresh_count: 0, group_id: 2 },
-        { image_url: "", remain_refresh_count: 0, group_id: 3 },
-      ],
+      components: [],
     };
   },
   mounted() {
@@ -167,13 +160,16 @@ export default {
       const {
         config: { activity_id },
       } = this;
+      if(this.components[index].remain_refresh_count == 0) {
+        Toast(`暂无刷新次数，请先观看第${index+1}组视频1分钟获取刷新次数`);
+        return;
+      }
       const res = await refreshPart({ activity_id, group_id: this.components[index].group_id });
-      if (!this.components[index]) return;
-      if (res && res.image_url) this.components[index].image_url = res.image_url;
-      if (res && typeof res.remain_refresh_count === "number") {
+      if (res) {
+        this.components[index].image_url = res.image_url;
+        this.components[index].group_status = 2;
         this.components[index].remain_refresh_count = res.remain_refresh_count;
       }
-      this.combination = this.components.map((item) => item.image_id).join("-");
     },
   },
 };

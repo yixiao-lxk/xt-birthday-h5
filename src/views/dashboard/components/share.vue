@@ -21,26 +21,30 @@
 <script>
 import html2canvas from "html2canvas";
 import { Toast } from "vant";
+import { getNickname,uploadImage } from "@/utils/api";
 
 export default {
   name: "ShareModal",
   data() {
     return {
       visible: false, //分享弹窗是否显示
-      robotImg: "", //机甲图片
+      robotImg: "",//机甲图片
       isShare: false, //是否分享
-      base64Img: "", //分享图片base64
+      base64Img: '', //分享图片base64
       image_url: "", // 分享图片url
       nickname: "", //用户昵称
-
+      activityId: "", //活动id
     };
   },
   watch: {},
   methods: {
     //展示分享
-    async showShare(combination, nickname) {
-      this.robotImg = require(`@/assets/images/generate/${combination}.png`);
-      this.nickname = nickname;
+    async showShare(data) {
+      // 获取用户昵称
+      const res = await getNickname();
+      this.nickname = res.name;
+      this.activityId = data.activity_id || "";
+      this.robotImg = data.poster_url || "";
       this.visible = true;
     },
     //关闭分享
@@ -109,9 +113,9 @@ export default {
                 console.log("保存图片结果:", info);
                 // 保存成功后关闭弹窗
                 if (info.code === 0) {
-                  Toast.success("保存成功");
+                  Toast("保存成功");
                 } else {
-                  Toast.error(info.errMsg || "保存失败");
+                  Toast(info.errMsg || "保存失败");
                 }
                 this.closeShare();
               },
@@ -135,7 +139,7 @@ export default {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      Toast.success("保存成功");
+      Toast("保存成功");
       this.closeShare();
     },
     //打开分享
@@ -144,6 +148,41 @@ export default {
       //调用分享方法
       this.share(res.image_url);
       this.closeShare();
+    },
+    // 上传分享图片
+    async uploadImage() {
+      try {
+        // 将base64图片转换为Blob对象
+        const blob = await this.base64ToBlob(this.base64Img);
+
+        // 创建FormData对象
+        const formData = new FormData();
+        formData.append("file", blob, "share_image.png");
+        formData.append("activity_id", this.activityId);
+
+        // 调用上传接口
+        const res = await uploadImage(formData);
+        return res;
+      } catch (error) {
+        console.error("上传失败:", error);
+        throw error;
+      }
+    },
+    // base64转Blob
+    base64ToBlob(base64) {
+      return new Promise((resolve) => {
+        const arr = base64.split(",");
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+
+        resolve(new Blob([u8arr], { type: mime }));
+      });
     },
     //实际分享逻辑
     share(image_url) {
@@ -167,7 +206,7 @@ export default {
                 generic: {
                   type: "image", // (必需，包含'text', 'image')
                   title: "分享标题", // (必需)
-                  imageUrl: "图片链接", // (必需)
+                  imageUrl: image_url, // (必需)
                   text: "描述一下", // (必需)
                 },
                 dynamic: {
