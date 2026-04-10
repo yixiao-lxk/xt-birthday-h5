@@ -68,7 +68,7 @@ Mock.mock(/\/activity\/api\/open_api\/v1\/star_rail_mecha\/detail/, "get", (opti
         },
         {
           "group_id": 2,
-          "group_status": Mock.Random.integer(1, 2),
+          "group_status": Mock.Random.integer(0, 2),
           ...getGroupImage(2),
           "remain_refresh_count": Mock.Random.integer(0, 1),
         },

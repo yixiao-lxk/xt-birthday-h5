@@ -160,6 +160,9 @@ export default {
       const {
         config: { activity_id },
       } = this;
+      if(this.components[index].group_status == 0) {
+        return;
+      }
       if(this.components[index].remain_refresh_count == 0) {
         Toast(`暂无刷新次数，请先观看第${index+1}组视频1分钟获取刷新次数`);
         return;
