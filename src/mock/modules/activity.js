@@ -131,7 +131,7 @@ Mock.mock(/\/activity\/api\/open_api\/v1\/star_rail_mecha\/synthesize/, "post", 
 });
 
 // 2.4 获取昵称接口
-Mock.mock(/\/up_account\/info/, "get", (options) => {
+Mock.mock(/\/activity\/api\/open_api\/v1\/up_account\/info/, "get", (options) => {
   return {
     err_code: 0,
     error_msg: "",
