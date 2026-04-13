@@ -10,7 +10,7 @@ export const refreshPart = (data) => http.post("/star_rail_mecha/refresh", data)
 export const mergeMecha = (data) => http.post("/star_rail_mecha/synthesize", data);
 
 //获取昵称接口
-export const getNickname = (params) => http.get(" /up_account/info", params);
+export const getNickname = (params) => http.get("/up_account/info", params);
 
 //上传图片接口
 export const uploadImage = (formData) =>
