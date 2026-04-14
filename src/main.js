@@ -18,7 +18,7 @@ import "vant/lib/index.css";
 Vue.use(Vant);
 // 开发环境下引入mock
 // if (process.env.NODE_ENV === "development") {
-require("./mock");
+// require("./mock");
 // }
 Vue.config.productionTip = false;
 // 初始化biliSDK环境
