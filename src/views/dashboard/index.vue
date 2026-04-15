@@ -179,6 +179,11 @@ export default {
 </script>
 
 <style scoped lang="less">
+main {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
 .container {
   width: 100%;
   height: 12.33rem;
