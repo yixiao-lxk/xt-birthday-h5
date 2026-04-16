@@ -212,7 +212,7 @@ export default {
                 dynamic: {
                   title: "分享标题", // (必需)
                   content_type: 2048, // (必需)
-                  cover_url: "封面图", // (必需)
+                  cover_url: image_url, // (必需)
                   description: "描述描述描述描述描述描述描述", // (必需)
                   images: ["", "", ""], // (非必需)
                   publish: false, // (非必需)
