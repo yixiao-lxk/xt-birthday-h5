@@ -181,11 +181,11 @@ export default {
 <style scoped lang="less">
 main {
   position: relative;
-  width: 100%;
+  width: 100vw;
   margin: 0 auto;
 }
 .container {
-  width: 100%;
+  width: 100vw;
   height: 12.33rem;
   background: url(@/assets/images/bottom_bg.png) no-repeat top center;
   background-size: 100% auto;
