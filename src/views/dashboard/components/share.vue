@@ -117,7 +117,7 @@ export default {
                 } else {
                   Toast(info.errMsg || "保存失败");
                 }
-                this.closeShare();
+                // this.closeShare();
               },
             });
           } else {
@@ -140,14 +140,14 @@ export default {
       link.click();
       document.body.removeChild(link);
       Toast("保存成功");
-      this.closeShare();
+      // this.closeShare();
     },
     //打开分享
     async openBilibiliShare() {
       const res = await this.uploadImage();
       //调用分享方法
       this.share(res.image_url);
-      this.closeShare();
+      // this.closeShare();
     },
     // 上传分享图片
     async uploadImage() {
