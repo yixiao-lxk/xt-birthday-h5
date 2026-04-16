@@ -305,6 +305,8 @@ export default {
 .shareBox_container {
   position: relative;
   width: 6.7rem;
+  height: 9.5rem;
+  overflow: hidden;
 
   .shareBtnBox {
     position: absolute;
