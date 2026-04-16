@@ -19,7 +19,7 @@
             </div>
             <div v-if="components[0] && components[0].group_status == 1">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
-              <img class="unlockedImg" src="@/assets/images/components/unlocked_video_1.png" alt="" />
+              <img class="unlockedImg" @click.stop="refreshComponent(0)" src="@/assets/images/components/unlocked_video_1.png" alt="" />
             </div>
             <div  v-if="components[0] && components[0].group_status == 2">
               <img class="part_img" :src="components[0].image_url" alt="头" />
@@ -40,7 +40,7 @@
             </div>
             <div v-if="components[1] && components[1].group_status == 1">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
-              <img class="unlockedImg" src="@/assets/images/components/unlocked_video_2.png" alt="" />
+              <img class="unlockedImg" @click.stop="refreshComponent(1)" src="@/assets/images/components/unlocked_video_2.png" alt="" />
             </div>
             <div  v-if="components[1] && components[1].group_status == 2">
               <img class="part_img" :src="components[1].image_url" alt="身体" />
@@ -61,7 +61,7 @@
             </div>
             <div v-if="components[2] && components[2].group_status == 1">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
-              <img class="unlockedImg" src="@/assets/images/components/unlocked_video_3.png" alt="" />
+              <img class="unlockedImg" @click.stop="refreshComponent(2)" src="@/assets/images/components/unlocked_video_3.png" alt="" />
             </div>
             <div  v-if="components[2] && components[2].group_status == 2">
               <img class="part_img" :src="components[2].image_url" alt="武器" />
