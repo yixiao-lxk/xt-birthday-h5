@@ -288,20 +288,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-// 修改el-dialog样式
-/deep/ .el-dialog__header {
-  display: none;
-}
-
-/deep/ .el-dialog {
-  background: none;
-  box-shadow: none;
-}
-
-/deep/ .el-dialog__body {
-  padding: 0;
-}
-
 .shareBox_container {
   position: relative;
   width: 6.7rem;
