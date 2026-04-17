@@ -23,7 +23,6 @@ import html2canvas from "html2canvas";
 import { Toast } from "vant";
 import { getNickname,uploadImage } from "@/utils/api";
 import biliShare from "@bilibili/share-h5-next";
-import '@bilibili/share-h5-next/dist/share-h5.css';
 
 export default {
   name: "ShareModal",
@@ -48,11 +47,13 @@ export default {
       this.activityId = data.activity_id || "";
       this.robotImg = data.poster_url || "";
       this.visible = true;
+      document.body.classList.add("van-overflow-hidden");
     },
     //关闭分享
     closeShare() {
       this.visible = false;
       this.isShare = false;
+      document.body.classList.remove("van-overflow-hidden");
     },
     //生成图片
     async generateImg() {
@@ -219,8 +220,28 @@ export default {
   },
 };
 </script>
-
+<style lang="less">
+  .van-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+}
+</style>
 <style scoped lang="less">
+.van-popup {
+  position: fixed;
+  max-height: 100%;
+  overflow-y: auto;
+  -webkit-transition: -webkit-transform .3s;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  -webkit-overflow-scrolling: touch;
+}
 .shareBox_container {
   position: relative;
   width: 6.7rem;
@@ -254,6 +275,7 @@ export default {
 }
 
 .shareBox {
+  position: relative;
   width: 100%;
   height: 100%;
   background: url(@/assets/images/share/share_bg1.jpg) no-repeat top center;
