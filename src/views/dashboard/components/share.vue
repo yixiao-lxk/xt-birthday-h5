@@ -3,7 +3,7 @@
     <div class="shareBox_container">
       <div class="shareBox" :class="{ created: isShare }" id="shareBox">
         <img :src="robotImg" alt="机甲图片" class="robot_img" />
-        <img src="@/assets/images/share/cover.png" v-if="!isShare" alt="SSR盒子" class="ssr_box" />
+        <!-- <img src="@/assets/images/share/cover.png" v-if="!isShare" alt="SSR盒子" class="ssr_box" /> -->
         <span class="nicknameView" :class="{ created: isShare }">@{{ nickname }}</span>
         <img src="@/assets/images/share/qrcode.png" v-if="isShare" alt="二维码" class="qrcode">
       </div>
