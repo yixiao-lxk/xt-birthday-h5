@@ -22,6 +22,7 @@
 import html2canvas from "html2canvas";
 import { Toast } from "vant";
 import "vant/lib/toast/style";
+import "vant/lib/popup/style";
 import { getNickname,uploadImage } from "@/utils/api";
 import biliShare from "@bilibili/share-h5-next";
 
