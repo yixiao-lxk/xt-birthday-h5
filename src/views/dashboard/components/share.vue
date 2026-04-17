@@ -21,6 +21,7 @@
 <script>
 import html2canvas from "html2canvas";
 import { Toast } from "vant";
+import "vant/lib/toast/style";
 import { getNickname,uploadImage } from "@/utils/api";
 import biliShare from "@bilibili/share-h5-next";
 
@@ -241,6 +242,10 @@ export default {
   transition: transform .3s, -webkit-transform .3s;
   transition: transform .3s, -webkit-transform .3s;
   -webkit-overflow-scrolling: touch;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
 }
 .shareBox_container {
   position: relative;
