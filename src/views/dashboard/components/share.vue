@@ -22,7 +22,6 @@
 import html2canvas from "html2canvas";
 import { Toast } from "vant";
 import "vant/lib/toast/style";
-import "vant/lib/popup/style";
 import { getNickname,uploadImage } from "@/utils/api";
 import biliShare from "@bilibili/share-h5-next";
 
@@ -247,6 +246,14 @@ export default {
   left: 50%;
   -webkit-transform: translate3d(-50%, -50%, 0);
   transform: translate3d(-50%, -50%, 0);
+}
+.van-fade-enter-active {
+    -webkit-animation: .3s van-fade-in both ease-out;
+    animation: .3s van-fade-in both ease-out;
+}
+.van-fade-leave-active {
+    -webkit-animation: .3s van-fade-out both ease-in;
+    animation: .3s van-fade-out both ease-in;
 }
 .shareBox_container {
   position: relative;
