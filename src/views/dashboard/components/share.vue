@@ -23,7 +23,6 @@ import html2canvas from "html2canvas";
 import { Toast } from "vant";
 import { getNickname,uploadImage } from "@/utils/api";
 import biliShare from "@bilibili/share-h5-next";
-import '@bilibili/share-h5-next/dist/share-h5.css';
 
 export default {
   name: "ShareModal",
