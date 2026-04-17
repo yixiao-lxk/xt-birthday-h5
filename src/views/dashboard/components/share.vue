@@ -5,7 +5,7 @@
         <img :src="robotImg" alt="机甲图片" class="robot_img" />
         <!-- <img src="@/assets/images/share/cover.png" v-if="!isShare" alt="SSR盒子" class="ssr_box" /> -->
         <span class="nicknameView" :class="{ created: isShare }">@{{ nickname }}</span>
-        <img src="@/assets/images/share/qrcode.png" v-if="isShare" alt="二维码" class="qrcode">
+        <!-- <img src="@/assets/images/share/qrcode.png" v-if="isShare" alt="二维码" class="qrcode"> -->
       </div>
       <div class="shareBtnBox" v-if="!isShare">
         <img src="@/assets/images/share/want_share.png" @click.stop="generateImg" alt="我要分享" />
