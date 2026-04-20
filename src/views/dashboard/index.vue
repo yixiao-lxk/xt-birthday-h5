@@ -17,7 +17,7 @@
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_img_1.png" alt="" />
             </div>
-            <div v-if="(components[0] && components[0].group_status == 1) || err_code == -3">
+            <div v-if="(components[0] && components[0].group_status == 1) || components.length == 0"">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" @click.stop="refreshComponent(0)" src="@/assets/images/components/unlocked_video_1.png" alt="" />
             </div>
@@ -38,7 +38,7 @@
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_img_2.png" alt="" />
             </div>
-            <div v-if="(components[1] && components[1].group_status == 1) || err_code == -3">
+            <div v-if="(components[1] && components[1].group_status == 1) || components.length == 0">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" @click.stop="refreshComponent(1)" src="@/assets/images/components/unlocked_video_2.png" alt="" />
             </div>
@@ -59,7 +59,7 @@
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" src="@/assets/images/components/unlocked_img_3.png" alt="" />
             </div>
-            <div v-if="(components[2] && components[2].group_status == 1) || err_code == -3">
+            <div v-if="(components[2] && components[2].group_status == 1) || components.length == 0">
               <img class="part_img" src="@/assets/images/components/unlocked_bg.png" alt="解锁背景" />
               <img class="unlockedImg" @click.stop="refreshComponent(2)" src="@/assets/images/components/unlocked_video_3.png" alt="" />
             </div>
@@ -79,7 +79,7 @@
         <img v-if="components.every((item) => item.group_status == 2)" src="@/assets/images/combine_img.png" alt="" @click="showShareDialog" />
         <img v-else class="disabled" src="@/assets/images/combine_wait_img.png" alt="" />
       </div>
-      <div class="bottom_btn_box" v-if="err_code == -3">
+      <div class="bottom_btn_box" v-if="components.length == 0">
         <img class="disabled" src="@/assets/images/combine_wait_img.png" alt="" />
       </div>
     </div>
@@ -136,14 +136,9 @@ export default {
       const {
         config: { activity_id },
       } = this;
-      try {
-        const res = await getActivityInfo({ activity_id });
-        this.components = Array.isArray(res.groups) && res.groups.length ? res.groups : this.components;
-        console.log("部件数据", res);
-      } catch (error) {
-        console.log("获取部件数据失败", error);
-        this.err_code = error.err_code
-      }
+      const res = await getActivityInfo({ activity_id });
+      this.components = Array.isArray(res.groups) && res.groups.length ? res.groups : this.components;
+      console.log("部件数据", res);
     },
     // 展示分享弹窗
     async showShareDialog() {
