@@ -141,6 +141,7 @@ export default {
         this.components = Array.isArray(res.groups) && res.groups.length ? res.groups : this.components;
         console.log("部件数据", res);
       } catch (error) {
+        console.log("获取部件数据失败", error);
         this.err_code = error.err_code
       }
     },
