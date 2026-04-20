@@ -26,7 +26,7 @@
             </div>
             <img class="refresh_btn" @click.stop="refreshComponent(0)" src="@/assets/images/components/refresh_btn.png"
               alt="" 刷新 />
-            <span class="refresh_count_view">{{components[0] && components[0].remain_refresh_count }}</span>
+            <span class="refresh_count_view">{{(components[0] && components[0].remain_refresh_count) || 0}}</span>
             <div class="buttonView">
 
             </div>
@@ -47,7 +47,7 @@
             </div>
             <img class="refresh_btn" @click.stop="refreshComponent(1)" src="@/assets/images/components/refresh_btn.png"
               alt="" 刷新 />
-            <span class="refresh_count_view">{{components[1] && components[1].remain_refresh_count }}</span>
+            <span class="refresh_count_view">{{(components[1] && components[1].remain_refresh_count) || 0}}</span>
             <div class="buttonView">
 
             </div>
@@ -68,7 +68,7 @@
             </div>
             <img class="refresh_btn" @click.stop="refreshComponent(2)" src="@/assets/images/components/refresh_btn.png"
               alt="" 刷新 />
-            <span class="refresh_count_view">{{components[2] && components[2].remain_refresh_count }}</span>
+            <span class="refresh_count_view">{{(components[2] && components[2].remain_refresh_count) || 0}}</span>
             <div class="buttonView">
 
             </div>
