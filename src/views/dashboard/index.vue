@@ -90,7 +90,6 @@
 <script>
 import share from "./components/share.vue";
 import { Toast } from "vant";
-import "vant/lib/toast/style";
 import { getActivityInfo, refreshPart, mergeMecha } from "@/utils/api";
 
 export default {
