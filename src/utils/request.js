@@ -39,13 +39,12 @@ request.interceptors.response.use(
     const res = response.data;
 
     // 根据后端返回的状态码处理
-    if (res.err_code === 0) {
-      return Promise.resolve(res.result);
-    } else {
-      // 处理错误情况
-      Toast.error(res.error_msg);
-      return Promise.reject(new Error(res.error_msg || "请求失败"));
+    if (res.status === "success") {
+      return res.result;
     }
+    // 处理错误情况
+    Toast.error(res.error_msg);
+    return Promise.reject(new Error(res.error_msg || "请求失败"));
   },
   (error) => {
     // 对响应错误做点什么
