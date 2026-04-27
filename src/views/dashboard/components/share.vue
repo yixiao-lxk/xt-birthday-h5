@@ -198,7 +198,7 @@ export default {
         desc: pageInfo.shareText || "快来参与星穹铁道生日会活动吧！", // 分享描述
         link: location.href, // 分享链接，必传
         pics: image_url,
-        share_from_topic_id: 1332371,
+        share_from_topic_id: 1177780,
         share_from_topic_name: "星穹铁道生日会",
         pictureList: [
           {
